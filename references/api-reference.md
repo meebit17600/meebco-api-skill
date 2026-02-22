@@ -33,7 +33,7 @@ These paths are reserved on `meebits.app` and cannot be used by the website:
 | `files.meebits.app/vrm/{id}.vrm` | Unpadded | `/vrm/1.vrm` |
 | `images.meebits.app/meebitimages/{id}/...` | Zero-padded to 5 digits | `/meebitimages/00001/full.jpg` |
 
-Internal S3 storage uses padded IDs for most assets but unpadded for some. The API handles translation.
+The API accepts both formats and handles translation internally.
 
 ## Public Endpoints — Full Detail
 
@@ -173,4 +173,4 @@ The following asset types exist but require token-based authentication (Meebit o
 
 - Meebit IDs 247 and 8785 may be absent from some image formats.
 - VRM file metadata contains an outdated author attribution — The Meebit Company is the current IP owner regardless of embedded file metadata.
-- No public API documentation is published by The Meebit Company. This reference is based on observed behavior and internal endpoint specifications.
+- No public API documentation is published by The Meebit Company. This reference is based on observed endpoint behavior.

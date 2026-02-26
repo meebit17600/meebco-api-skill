@@ -134,6 +134,27 @@ GET https://api.meebits.app/v2/3d/larvalabs_vrm/{id}
 - **Auth:** none
 - **Details:** 24-bone humanoid skeleton, 16 materials, PBR rendering. Compatible with Three.js (`@pixiv/three-vrm`), VTube Studio, VSeeFace, and other VRM-compatible viewers.
 
+### 10. Futbol Avatar GLB
+
+```
+GET https://cdn.meebco.com/futbol/glb/{country}_{jersey}_avatar.glb
+```
+
+- **Content-Type:** `model/gltf-binary`
+- **Auth:** none
+- **URL pattern:** `{country}` is lowercase country name, `{jersey}` is jersey number
+- **Available countries:** mexico, canada, argentina, brazil, netherlands, japan (10 jerseys each, 60 total)
+- **Details:** GLB (glTF binary) 3D models of Meebit characters in national team futbol kits. Compatible with Three.js (`GLTFLoader`), Blender, and other glTF-compatible viewers.
+
+| Country | Jersey Numbers |
+|---------|---------------|
+| mexico | 2, 3, 4, 5, 6, 7, 9, 10, 11, 22 |
+| canada | 2, 4, 5, 6, 7, 8, 9, 10, 11, 19 |
+| argentina | 2, 3, 4, 5, 7, 8, 9, 10, 11, 22 |
+| brazil | 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 |
+| netherlands | 2, 3, 4, 5, 7, 8, 9, 10, 11, 21 |
+| japan | 2, 4, 5, 6, 7, 8, 9, 10, 11, 20 |
+
 ## Legacy Query Parameter URL Format
 
 The legacy image endpoint uses query parameters instead of path segments:

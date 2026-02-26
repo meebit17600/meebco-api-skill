@@ -3,10 +3,11 @@ name: meebco-api
 description: >
   Use when building games, apps, or creative projects that use Meebits assets.
   Covers fetching Meebit images (full body, portrait, outfit, shoes), sprite sheets,
-  VRM 3D avatars, and metadata from the Meebits API. Use when requests mention
-  Meebits, MeebCo, meebit images, sprites, VRM models, 3D voxel avatars,
-  meebits.app, api.meebits.app, files.meebits.app, or integrating Meebit
-  characters into Three.js, web games, or metaverse projects.
+  VRM 3D avatars, Futbol avatar GLBs, and metadata from the Meebits API. Use when
+  requests mention Meebits, MeebCo, meebit images, sprites, VRM models, 3D voxel
+  avatars, futbol avatars, soccer avatars, futbol GLB, meebits.app, api.meebits.app,
+  files.meebits.app, cdn.meebco.com, or integrating Meebit characters into Three.js,
+  web games, or metaverse projects.
 ---
 
 # MeebCo API — Meebits Asset Integration
@@ -61,6 +62,7 @@ All public endpoints require no authentication. Meebit IDs range from 1 to 20,00
 | Portrait (YL) | `api.meebits.app/v2/images/yugalabs_portrait/{id}` | `files.meebits.app/mb1_portrait/{id}.png` | PNG |
 | Sprite Sheet | `api.meebits.app/v2/sprites/sheet/{id}` | `files.meebits.app/sprites/{id}.png` | PNG |
 | VRM 3D Model | `api.meebits.app/v2/3d/larvalabs_vrm/{id}` | `files.meebits.app/vrm/{id}.vrm` | VRM/glTF |
+| Futbol Avatar GLB | `cdn.meebco.com/futbol/glb/{country}_{jersey}_avatar.glb` | — | GLB/glTF |
 
 Additional 3D formats (GLB, FBX, VOX, Blend) and premium image types (posters, isometric views) exist but are token-gated for Meebit owners.
 
@@ -139,6 +141,38 @@ function meebitCard(id) {
   return `<img src="${MEEBIT_IMG(id)}" alt="Meebit #${id}"
     loading="lazy" onerror="this.src='${FALLBACK(id)}'">`;
 }
+```
+
+### Futbol Avatar GLBs
+
+MeebCo Futbol avatars are 3D GLB models of Meebit characters in national team futbol kits. They are publicly available with no authentication required.
+
+**URL pattern:** `https://cdn.meebco.com/futbol/glb/{country}_{jersey}_avatar.glb`
+
+Where `{country}` is lowercase and `{jersey}` is the jersey number.
+
+**Available teams and jersey numbers (60 total):**
+
+| Country | Jersey Numbers |
+|---------|---------------|
+| Mexico | 2, 3, 4, 5, 6, 7, 9, 10, 11, 22 |
+| Canada | 2, 4, 5, 6, 7, 8, 9, 10, 11, 19 |
+| Argentina | 2, 3, 4, 5, 7, 8, 9, 10, 11, 22 |
+| Brazil | 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 |
+| Netherlands | 2, 3, 4, 5, 7, 8, 9, 10, 11, 21 |
+| Japan | 2, 4, 5, 6, 7, 8, 9, 10, 11, 20 |
+
+**Loading a Futbol avatar (Three.js):**
+
+```javascript
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+
+const FUTBOL_URL = (country, jersey) =>
+  `https://cdn.meebco.com/futbol/glb/${country}_${jersey}_avatar.glb`;
+
+const loader = new GLTFLoader();
+const gltf = await loader.loadAsync(FUTBOL_URL("japan", 20));
+scene.add(gltf.scene);
 ```
 
 ### Trait System for Game Mechanics
